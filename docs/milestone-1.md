@@ -6,7 +6,7 @@ Research checked November 7, 2026. Public documentation is evidence of published
 
 The owner has supplied operating country, personal-only pilot intent, departure airport, three destination names, dates, traveler count, budget and date flexibility. Private trip details are recorded in ignored `data/pilot-intake.json`, outside Git.
 
-Still to clarify: whether the destinations are alternatives or one multi-city trip, explicit adult-count confirmation, and hotel room count. The flight access test treats the five travelers entered under the adult-traveler field as adults; this is an assumption, not an age verification. The date year is inferred as 2026. No hotel search is authorized or attempted before Stays access is confirmed.
+The owner confirms that the destinations are alternatives, all travelers are adults, and there is no fixed hotel room preference. Room count remains open for a future cost comparison using supplier-permitted occupancy; the flight-only brief's default room count is not a selected hotel arrangement. The date year is inferred as 2026. No hotel search is authorized or attempted before Stays access is confirmed.
 
 ## Evidence and decision log
 
@@ -71,7 +71,7 @@ Record one case per route/date and accommodation query:
 | Case | Requested market/dates | Provider request ID | Result / gaps | Verified by and date |
 |---|---|---|---|---|
 | Flight search | Private local brief; one standalone round trip, offset zero | None received | One attempted application call; supplier could not be reached; no account verification | Local attempt log, November 7, 2026 |
-| Hotel search | Pending rooms and approved access | None | Not executed; access not requested | Owner status, November 7, 2026 |
+| Hotel search | Flexible room count; supplier-permitted occupancy and approved access required | None | Not executed; access not requested | Owner status, November 7, 2026 |
 | Authentication/access error | Pending | Pending | Fixture-tested only | Pending |
 | Quote expiry/repricing | Pending | Pending | Not implemented | Pending |
 | Hold/ticket/cancel/refund lifecycle | Pending | Pending | Not implemented | Pending |
@@ -80,7 +80,7 @@ Use sample or test traveler data. The implemented adapter performs search only. 
 
 ## Acceptance criteria
 
-- [ ] Operating country and target routes selected.
+- [x] Operating country and target destination alternatives selected; private details recorded locally.
 - [ ] Provider confirms account eligibility and flight/hotel permissions.
 - [ ] Target flight and hotel searches succeed against our sandbox credentials, with recorded request IDs.
 - [ ] Important inventory gaps and actual currency behavior recorded.
