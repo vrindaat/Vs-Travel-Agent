@@ -2,23 +2,18 @@
 
 Research checked November 7, 2026. Public documentation is evidence of published capabilities, not evidence that our account is approved.
 
-## Launch brief — awaiting owner input
+## Launch brief — local pilot intake recorded
 
-- Operating/company country: pending
-- Personal-only pilot or commercial launch: pending
-- Departure airport: pending
-- First 1–3 destinations: pending
-- Test travel dates and traveler count: pending
-- Budget, currency, date flexibility: pending
+The owner has supplied operating country, personal-only pilot intent, departure airport, three destination names, dates, traveler count, budget and date flexibility. Private trip details are recorded in ignored `data/pilot-intake.json`, outside Git.
 
-Backend preparation proceeds without assuming these details. Route coverage cannot be assessed meaningfully until they are supplied.
+Still to clarify: whether the destinations are alternatives or one multi-city trip, explicit adult-count confirmation, and hotel room count. The flight access test treats the five travelers entered under the adult-traveler field as adults; this is an assumption, not an age verification. The date year is inferred as 2026. No hotel search is authorized or attempted before Stays access is confirmed.
 
 ## Evidence and decision log
 
 | Supplier | Public evidence | Account status | Initial decision |
 |---|---|---|---|
-| Duffel Flights | Search API, eligible unpaid holds, public pricing, support/webhooks documentation | No token supplied; not tested against account | First sandbox candidate, conditional on country, content and servicing |
-| Duffel Stays | Search/rates/quote/booking; separate access request | Access unverified | Test alongside Flights to reduce integration work |
+| Duffel Flights | Search API, eligible unpaid holds, public pricing, support/webhooks documentation | Owner reports account created; local test-token prefix validated; one attempt failed without a supplier response | First sandbox candidate, conditional on country, content and servicing |
+| Duffel Stays | Search/rates/quote/booking; separate access request | Owner has not requested access; no hotel calls made | Request access before a separate bounded hotel test |
 | Booking.com Demand | Managed affiliate prerequisites and order creation | No partner agreement confirmed | Alternative, not a launch dependency |
 | Expedia Rapid | Hotel hold/resume documented | Access unverified | Alternative if inventory or servicing is better |
 | Viator | Basic affiliate redirects; Full + Booking requires approval/certification | Access unverified | Assess after core flight/hotel supplier check |
@@ -36,7 +31,9 @@ Sources:
 
 ## What the owner does first
 
-Create a Duffel account, describe the personal pilot honestly, and request Stays access. Create a test API token. Add it to .env locally; never commit it. Production eligibility, business verification and payment onboarding are separate from sandbox signup.
+The owner reports a Duffel account and has saved a test token in the ignored `.env`. Local configuration now selects `duffel_sandbox`, with supplier caching disabled. Token-prefix and configuration checks do not verify authentication or account permissions.
+
+Request Stays access, describing the personal pilot honestly. An unsent draft is available locally in ignored `data/stays-access-request-draft.txt`. Production eligibility, business verification and payment onboarding are separate from sandbox signup.
 
 Do not submit speculative company facts or accept a commercial agreement before reviewing its obligations.
 
@@ -65,14 +62,16 @@ The backend meters outbound HTTP attempts, not this commercial definition of bil
 
 ## Sandbox validation worksheet
 
-Use the [single-search runbook](sandbox-runbook.md) to preview and execute each check separately. Local `.env` inspection on November 7, 2026 found mock mode and no configured test token. No account-backed sandbox or production search has been executed. Automated tests use synthetic results and HTTP transport fixtures only.
+Use the [single-search runbook](sandbox-runbook.md) to preview and execute each check separately. On November 7, 2026, after the owner supplied a test token, one flight-only attempt was made at date offset zero. It returned the sanitized error "Supplier search timed out or could not be reached", without a supplier response or request ID. One durable local allowance was consumed, with no retry. This establishes neither authentication failure nor authentication success, and is not evidence of empty inventory. Actual account access, prices, currency behavior and production coverage remain unverified.
+
+The private selected brief and trip ID are in ignored `data/pilot-flight-probe.json`; the failed-attempt evidence is in `data/pilot-flight-evidence.json`. Automated tests continue to use synthetic results and HTTP transport fixtures only. No production request has been made.
 
 Record one case per route/date and accommodation query:
 
 | Case | Requested market/dates | Provider request ID | Result / gaps | Verified by and date |
 |---|---|---|---|---|
-| Flight search | Pending | Pending | Not executed | Pending |
-| Hotel search | Pending | Pending | Not executed | Pending |
+| Flight search | Private local brief; one standalone round trip, offset zero | None received | One attempted application call; supplier could not be reached; no account verification | Local attempt log, November 7, 2026 |
+| Hotel search | Pending rooms and approved access | None | Not executed; access not requested | Owner status, November 7, 2026 |
 | Authentication/access error | Pending | Pending | Fixture-tested only | Pending |
 | Quote expiry/repricing | Pending | Pending | Not implemented | Pending |
 | Hold/ticket/cancel/refund lifecycle | Pending | Pending | Not implemented | Pending |

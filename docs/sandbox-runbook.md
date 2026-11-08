@@ -1,6 +1,6 @@
 # First account-backed supplier check
 
-This procedure performs searches only. It creates no reservations, holds, payments or cancellation liability. The launch country, pilot type and first test trip still need owner input. No account-backed request has been executed as of November 7, 2026.
+This procedure performs searches only. It creates no reservations, holds, payments or cancellation liability. The owner's private launch/trip intake is now recorded locally under ignored `data/`. On November 7, 2026, one flight-only application attempt failed without a supplier response or request ID. No account-backed search has completed successfully, and production access remains unverified. See the [current milestone evidence](milestone-1.md).
 
 ## Account setup
 
