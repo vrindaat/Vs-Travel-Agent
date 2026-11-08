@@ -1,0 +1,12 @@
+.venv/
+.bootstrap/
+.env
+.env.*
+!.env.example
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+data/
+*.sqlite3*
+*.egg-info/
+*.log
