@@ -66,6 +66,8 @@ Use the [single-search runbook](sandbox-runbook.md) to preview and execute each 
 
 The private selected brief and trip ID are in ignored `data/pilot-flight-probe.json`; the failed-attempt evidence is in `data/pilot-flight-evidence.json`. Automated tests continue to use synthetic results and HTTP transport fixtures only. No production request has been made.
 
+On November 10, 2026, a connectivity check from the workspace was denied before sending an API request. The existing attempt log still contained only the initial failure. The three route briefs were validated offline and saved under ignored `data/pilot-flight-comparison.json`. Run the first route from regular PowerShell before spending further search attempts.
+
 Record one case per route/date and accommodation query:
 
 | Case | Requested market/dates | Provider request ID | Result / gaps | Verified by and date |

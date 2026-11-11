@@ -20,6 +20,17 @@ The brief needs origin/destination airport codes, future departure/return dates,
 
 ## Preview, then run one flight check
 
+For the current pilot, the first trip is already saved locally. From regular PowerShell at the repository root, run the existing New York check once:
+
+```powershell
+$pilot = Get-Content -LiteralPath data/pilot-flight-probe.json -Raw | ConvertFrom-Json
+.\.bootstrap\Scripts\uv.exe --cache-dir data/uv-cache run --locked --no-sync --env-file .env python -m travel_agent.probe --trip-id $pilot.trip_id --operation flights --execute
+```
+
+If the request fails, keep the sanitized output and stop before trying other routes. The command does not need the local API server. The comparison briefs in ignored `data/pilot-flight-comparison.json` are prepared for later checks; no price or inventory comparison has run. [Duffel's test mode](https://duffel.com/docs/api/overview/test-mode/test-card-numbers) does not establish realistic schedules or fares, so do not rank the destinations using sandbox prices.
+
+For a different trip, use the generic preview and execution steps below.
+
 Run from the repository root with the same `.env` and database as the API. Replace `YOUR_TRIP_ID` with the saved ID:
 
 ```powershell
