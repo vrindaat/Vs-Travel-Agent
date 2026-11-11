@@ -20,15 +20,9 @@ The brief needs origin/destination airport codes, future departure/return dates,
 
 ## Preview, then run one flight check
 
-For the current pilot, continue with Chicago from regular PowerShell at the repository root.
+The current pilot's flight integration check is complete. The New York response verified test-token authentication, request payload handling, normalization, and USD results. Additional Chicago or Miami sandbox calls are optional diagnostics for specific integration questions. Proceed to Stays access and the outstanding supplier eligibility, commercial, retention, and servicing questions in the milestone checklist.
 
-```powershell
-$comparison = Get-Content -LiteralPath data/pilot-flight-comparison.json -Raw | ConvertFrom-Json
-$route = $comparison.routes | Where-Object destination -EQ 'ORD'
-.\.bootstrap\Scripts\uv.exe --cache-dir data/uv-cache run --locked --no-sync --env-file .env python -m travel_agent.probe --trip-id $route.trip_id --operation flights --execute
-```
-
-Record the status, request ID, normalized offer count, and observed currencies. Use `MIA` for the Miami check after reviewing Chicago's result. If a request fails, keep the sanitized output and diagnose the error before spending another attempt. The command runs directly from PowerShell. For market price comparisons, use a source with live inventory. [Duffel test mode](https://duffel.com/docs/api/overview/test-mode/test-card-numbers)
+Compare destination affordability using permitted live inventory when access is established. Sandbox schedules and fares serve integration testing. [Duffel test mode](https://duffel.com/docs/api/overview/test-mode/test-card-numbers)
 
 For a different trip, use the generic preview and execution steps below.
 

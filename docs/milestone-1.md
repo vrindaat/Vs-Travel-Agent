@@ -66,7 +66,7 @@ Use the [single-search runbook](sandbox-runbook.md) to preview and execute each 
 
 The private brief, trip ID, and attempt evidence are in ignored `data/pilot-flight-probe.json` and `data/pilot-flight-evidence.json`. The evidence preserves both attempts and the successful request ID. Production eligibility, inventory, and pricing remain unverified.
 
-The workspace connectivity check was denied before sending an API request. The three route briefs were validated offline and saved in ignored `data/pilot-flight-comparison.json`. Run the remaining checks individually from regular PowerShell.
+The workspace connectivity check was denied before sending an API request. The three route briefs were validated offline and saved in ignored `data/pilot-flight-comparison.json`. Additional city sandbox searches are optional diagnostics. The successful first search completes the flight authentication and adapter check. Confirm target-market coverage through provider evidence and permitted live inventory as account access allows.
 
 Record one case per route/date and accommodation query:
 
@@ -85,7 +85,7 @@ Use sample or test traveler data. The implemented adapter performs search only. 
 - [x] Operating country and target destination alternatives selected; private details recorded locally.
 - [x] First authenticated sandbox flight search succeeded with a recorded request ID.
 - [ ] Provider confirms account eligibility and flight/hotel permissions.
-- [ ] Target flight and hotel searches succeed against our sandbox credentials, with recorded request IDs.
+- [ ] Flight and authorized hotel integration searches succeed against our sandbox credentials, with recorded request IDs. The first flight search is complete. Hotel access remains pending.
 - [ ] Important inventory gaps and actual currency behavior recorded.
 - [ ] Lifecycle capabilities, support ownership and payment requirements confirmed in writing.
 - [ ] Pricing and data retention terms understood for the pilot.
