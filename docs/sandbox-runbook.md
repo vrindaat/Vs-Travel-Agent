@@ -1,6 +1,6 @@
 # First account-backed supplier check
 
-This procedure performs searches only. It creates no reservations, holds, payments or cancellation liability. The owner's private launch/trip intake is now recorded locally under ignored `data/`. On November 7, 2026, one flight-only application attempt failed without a supplier response or request ID. No account-backed search has completed successfully, and production access remains unverified. See the [current milestone evidence](milestone-1.md).
+This procedure covers supplier searches. The owner's first authenticated sandbox flight search succeeded from regular PowerShell on November 10, 2026 Pacific time. Production access remains unverified. See the [current milestone evidence](milestone-1.md).
 
 ## Account setup
 
@@ -20,14 +20,15 @@ The brief needs origin/destination airport codes, future departure/return dates,
 
 ## Preview, then run one flight check
 
-For the current pilot, the first trip is already saved locally. From regular PowerShell at the repository root, run the existing New York check once:
+For the current pilot, continue with Chicago from regular PowerShell at the repository root.
 
 ```powershell
-$pilot = Get-Content -LiteralPath data/pilot-flight-probe.json -Raw | ConvertFrom-Json
-.\.bootstrap\Scripts\uv.exe --cache-dir data/uv-cache run --locked --no-sync --env-file .env python -m travel_agent.probe --trip-id $pilot.trip_id --operation flights --execute
+$comparison = Get-Content -LiteralPath data/pilot-flight-comparison.json -Raw | ConvertFrom-Json
+$route = $comparison.routes | Where-Object destination -EQ 'ORD'
+.\.bootstrap\Scripts\uv.exe --cache-dir data/uv-cache run --locked --no-sync --env-file .env python -m travel_agent.probe --trip-id $route.trip_id --operation flights --execute
 ```
 
-If the request fails, keep the sanitized output and stop before trying other routes. The command does not need the local API server. The comparison briefs in ignored `data/pilot-flight-comparison.json` are prepared for later checks; no price or inventory comparison has run. [Duffel's test mode](https://duffel.com/docs/api/overview/test-mode/test-card-numbers) does not establish realistic schedules or fares, so do not rank the destinations using sandbox prices.
+Record the status, request ID, normalized offer count, and observed currencies. Use `MIA` for the Miami check after reviewing Chicago's result. If a request fails, keep the sanitized output and diagnose the error before spending another attempt. The command runs directly from PowerShell. For market price comparisons, use a source with live inventory. [Duffel test mode](https://duffel.com/docs/api/overview/test-mode/test-card-numbers)
 
 For a different trip, use the generic preview and execution steps below.
 

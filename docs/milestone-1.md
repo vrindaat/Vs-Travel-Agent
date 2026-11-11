@@ -12,7 +12,7 @@ The owner confirms that the destinations are alternatives, all travelers are adu
 
 | Supplier | Public evidence | Account status | Initial decision |
 |---|---|---|---|
-| Duffel Flights | Search API, eligible unpaid holds, public pricing, support/webhooks documentation | Owner reports account created; local test-token prefix validated; one attempt failed without a supplier response | First sandbox candidate, conditional on country, content and servicing |
+| Duffel Flights | Search API, eligible unpaid holds, public pricing, support/webhooks documentation | Authenticated sandbox search succeeded from the owner's terminal | First sandbox candidate, conditional on country, content and servicing |
 | Duffel Stays | Search/rates/quote/booking; separate access request | Owner has not requested access; no hotel calls made | Request access before a separate bounded hotel test |
 | Booking.com Demand | Managed affiliate prerequisites and order creation | No partner agreement confirmed | Alternative, not a launch dependency |
 | Expedia Rapid | Hotel hold/resume documented | Access unverified | Alternative if inventory or servicing is better |
@@ -62,17 +62,17 @@ The backend meters outbound HTTP attempts, not this commercial definition of bil
 
 ## Sandbox validation worksheet
 
-Use the [single-search runbook](sandbox-runbook.md) to preview and execute each check separately. On November 7, 2026, after the owner supplied a test token, one flight-only attempt was made at date offset zero. It returned the sanitized error "Supplier search timed out or could not be reached", without a supplier response or request ID. One durable local allowance was consumed, with no retry. This establishes neither authentication failure nor authentication success, and is not evidence of empty inventory. Actual account access, prices, currency behavior and production coverage remain unverified.
+Use the [single-search runbook](sandbox-runbook.md) to preview and execute each check separately. The November 7, 2026 flight attempt failed before a supplier response. On November 10, 2026 Pacific time, the owner ran the same flight check from regular PowerShell. The local attempt log records a successful sandbox response and a Duffel request ID. This verifies sandbox flight access for the account. Offer count and returned currencies are pending because the shared output included only usage counters.
 
-The private selected brief and trip ID are in ignored `data/pilot-flight-probe.json`; the failed-attempt evidence is in `data/pilot-flight-evidence.json`. Automated tests continue to use synthetic results and HTTP transport fixtures only. No production request has been made.
+The private brief, trip ID, and attempt evidence are in ignored `data/pilot-flight-probe.json` and `data/pilot-flight-evidence.json`. The evidence preserves both attempts and the successful request ID. Production eligibility, inventory, and pricing remain unverified.
 
-On November 10, 2026, a connectivity check from the workspace was denied before sending an API request. The existing attempt log still contained only the initial failure. The three route briefs were validated offline and saved under ignored `data/pilot-flight-comparison.json`. Run the first route from regular PowerShell before spending further search attempts.
+The workspace connectivity check was denied before sending an API request. The three route briefs were validated offline and saved in ignored `data/pilot-flight-comparison.json`. Run the remaining checks individually from regular PowerShell.
 
 Record one case per route/date and accommodation query:
 
 | Case | Requested market/dates | Provider request ID | Result / gaps | Verified by and date |
 |---|---|---|---|---|
-| Flight search | Private local brief; one standalone round trip, offset zero | None received | One attempted application call; supplier could not be reached; no account verification | Local attempt log, November 7, 2026 |
+| Flight search | Private local brief, round trip at offset zero | Recorded privately | Sandbox account access verified. Offer count and currencies pending. | Local attempt log, November 10, 2026 Pacific time |
 | Hotel search | Flexible room count; supplier-permitted occupancy and approved access required | None | Not executed; access not requested | Owner status, November 7, 2026 |
 | Authentication/access error | Pending | Pending | Fixture-tested only | Pending |
 | Quote expiry/repricing | Pending | Pending | Not implemented | Pending |
@@ -83,6 +83,7 @@ Use sample or test traveler data. The implemented adapter performs search only. 
 ## Acceptance criteria
 
 - [x] Operating country and target destination alternatives selected; private details recorded locally.
+- [x] First authenticated sandbox flight search succeeded with a recorded request ID.
 - [ ] Provider confirms account eligibility and flight/hotel permissions.
 - [ ] Target flight and hotel searches succeed against our sandbox credentials, with recorded request IDs.
 - [ ] Important inventory gaps and actual currency behavior recorded.
