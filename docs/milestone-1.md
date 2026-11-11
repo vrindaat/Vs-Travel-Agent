@@ -62,7 +62,7 @@ The backend meters outbound HTTP attempts, not this commercial definition of bil
 
 ## Sandbox validation worksheet
 
-Use the [single-search runbook](sandbox-runbook.md) to preview and execute each check separately. The November 7, 2026 flight attempt failed before a supplier response. On November 10, 2026 Pacific time, the owner ran the same flight check from regular PowerShell. The local attempt log records a successful sandbox response and a Duffel request ID. This verifies sandbox flight access for the account. Offer count and returned currencies are pending because the shared output included only usage counters.
+Use the [single-search runbook](sandbox-runbook.md) to preview and execute each check separately. The November 7, 2026 flight attempt failed before a supplier response. On November 10, 2026 Pacific time, the owner ran the same flight check from regular PowerShell. The local attempt log records a successful sandbox response and a Duffel request ID. This verifies sandbox flight access for the account. The owner's command output, matched to that request ID, confirms five normalized offers in USD, matching the brief's currency. The adapter returns at most five normalized offers, so this count represents the returned selection.
 
 The private brief, trip ID, and attempt evidence are in ignored `data/pilot-flight-probe.json` and `data/pilot-flight-evidence.json`. The evidence preserves both attempts and the successful request ID. Production eligibility, inventory, and pricing remain unverified.
 
@@ -72,7 +72,7 @@ Record one case per route/date and accommodation query:
 
 | Case | Requested market/dates | Provider request ID | Result / gaps | Verified by and date |
 |---|---|---|---|---|
-| Flight search | Private local brief, round trip at offset zero | Recorded privately | Sandbox account access verified. Offer count and currencies pending. | Local attempt log, November 10, 2026 Pacific time |
+| Flight search | Private local brief, round trip at offset zero | Recorded privately | Sandbox access verified. Five normalized offers in USD, matching the brief currency. | Local attempt log and owner command output, November 10, 2026 Pacific time |
 | Hotel search | Flexible room count; supplier-permitted occupancy and approved access required | None | Not executed; access not requested | Owner status, November 7, 2026 |
 | Authentication/access error | Pending | Pending | Fixture-tested only | Pending |
 | Quote expiry/repricing | Pending | Pending | Not implemented | Pending |
