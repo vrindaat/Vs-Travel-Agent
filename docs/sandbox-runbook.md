@@ -10,7 +10,7 @@ This procedure covers supplier searches. The owner's first authenticated sandbox
 4. Edit the existing ignored `.env` locally. Set `TRAVEL_PROVIDER=duffel_sandbox` and put the test token in `DUFFEL_ACCESS_TOKEN`. Leave `ALLOW_SUPPLIER_CACHE=false` until retention permission is confirmed. Never paste the token into chat or a shell command. Live tokens are rejected.
 5. Restart the local API using the README command. Check `/v1/providers`: `selected` must be `duffel_sandbox`. Its access-verification flags deliberately remain false; a configured token does not prove account approval.
 
-Account setup instructions were checked against these official guides on November 7, 2026. The Stays access link leads to a contact form; no form has been submitted by this project.
+Account setup instructions were checked against these official guides on November 7, 2026. The owner now reports submitting the Stays access form. Approval remains pending; no hotel searches have been made.
 
 ## Select the trip before searching
 

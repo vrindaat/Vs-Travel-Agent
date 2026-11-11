@@ -13,7 +13,7 @@ The owner confirms that the destinations are alternatives, all travelers are adu
 | Supplier | Public evidence | Account status | Initial decision |
 |---|---|---|---|
 | Duffel Flights | Search API, eligible unpaid holds, public pricing, support/webhooks documentation | Authenticated sandbox search succeeded from the owner's terminal | First sandbox candidate, conditional on country, content and servicing |
-| Duffel Stays | Search/rates/quote/booking; separate access request | Owner has not requested access; no hotel calls made | Request access before a separate bounded hotel test |
+| Duffel Stays | Search/rates/quote/booking; separate access request | Owner reports access request submitted; approval pending; no hotel calls made | Await access confirmation before a separate bounded hotel test |
 | Booking.com Demand | Managed affiliate prerequisites and order creation | No partner agreement confirmed | Alternative, not a launch dependency |
 | Expedia Rapid | Hotel hold/resume documented | Access unverified | Alternative if inventory or servicing is better |
 | Viator | Basic affiliate redirects; Full + Booking requires approval/certification | Access unverified | Assess after core flight/hotel supplier check |
@@ -33,7 +33,7 @@ Sources:
 
 The owner reports a Duffel account and has saved a test token in the ignored `.env`. Local configuration now selects `duffel_sandbox`, with supplier caching disabled. Token-prefix and configuration checks do not verify authentication or account permissions.
 
-Request Stays access, describing the personal pilot honestly. An unsent draft is available locally in ignored `data/stays-access-request-draft.txt`. Production eligibility, business verification and payment onboarding are separate from sandbox signup.
+The owner reports submitting the Stays access request. Approval remains pending. A local draft of the broader provider questions is available in ignored `data/stays-access-request-draft.txt`; submission of the access form does not establish that all these questions were sent or answered. Production eligibility, business verification and payment onboarding are separate from sandbox signup.
 
 Do not submit speculative company facts or accept a commercial agreement before reviewing its obligations.
 
@@ -73,7 +73,7 @@ Record one case per route/date and accommodation query:
 | Case | Requested market/dates | Provider request ID | Result / gaps | Verified by and date |
 |---|---|---|---|---|
 | Flight search | Private local brief, round trip at offset zero | Recorded privately | Sandbox access verified. Five normalized offers in USD, matching the brief currency. | Local attempt log and owner command output, November 10, 2026 Pacific time |
-| Hotel search | Flexible room count; supplier-permitted occupancy and approved access required | None | Not executed; access not requested | Owner status, November 7, 2026 |
+| Hotel search | Flexible room count; supplier-permitted occupancy and approved access required | None | Not executed; owner reports access request submitted; approval pending | Owner report following the access-form instructions |
 | Authentication/access error | Pending | Pending | Fixture-tested only | Pending |
 | Quote expiry/repricing | Pending | Pending | Not implemented | Pending |
 | Hold/ticket/cancel/refund lifecycle | Pending | Pending | Not implemented | Pending |
